@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Plant API</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        input, button { padding: 10px; margin: 5px; }
+        .result { background: #f5f5f5; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .loading { color: #666; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Plant Information API</h1>
+        <div>
+            <input type="text" id="plantName" placeholder="Enter plant name (e.g., Tulsi, Neem)" value="Tulsi">
+            <button onclick="testAPI()">Get Plant Info</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function testAPI() {
+            const plantName = document.getElementById('plantName').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!plantName) {
+                resultDiv.innerHTML = '<div class="error">Please enter a plant name</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div class="loading">Loading...</div>';
+            
+            try {
+                const response = await fetch('/functions/v1/get-plant-info', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ plantName })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                resultDiv.innerHTML = `
+                    <h3>Plant Information for: ${plantName}</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                console.error('API test error:', error);
+            }
+        }
+        
+        // Test on page load
+        window.onload = () => testAPI();
+    </script>
+</body>
+</html>

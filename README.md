@@ -1,22 +1,56 @@
-# Welcome to your Lovable project
+# Herb Garden Virtuoso
 
-## Project info
+A modern web application for exploring medicinal plants with AI-powered information and 3D visualization.
 
-**URL**: https://lovable.dev/projects/a1310af0-d655-4acf-ab08-42aa95f90747
+## Features
 
-## How can I edit this code?
+- 🌿 Search for medicinal plants
+- 🤖 AI-powered plant information using Google Gemini
+- 🎨 Modern UI with Tailwind CSS and shadcn/ui
+- 📱 Responsive design
+- ⚡ Fast development with Vite
 
-There are several ways of editing your application.
+## Quick Start
 
-**Use Lovable**
+### Option 1: Run with batch file (Windows)
+```bash
+start-servers.bat
+```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a1310af0-d655-4acf-ab08-42aa95f90747) and start prompting.
+### Option 2: Run with script (Linux/Mac)
+```bash
+chmod +x start-servers.sh
+./start-servers.sh
+```
 
-Changes made via Lovable will be committed automatically to this repo.
+### Option 3: Manual setup
 
-**Use your preferred IDE**
+1. **Start the backend server:**
+```bash
+cd server
+npm install
+node index.js
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. **Start the frontend (in another terminal):**
+```bash
+npm install
+npm run dev
+```
+
+The application will be available at:
+- Frontend: http://localhost:8080 (or available port)
+- Backend API: http://localhost:3002
+
+## Project Structure
+
+```
+herb-garden-virtuoso/
+├── src/                 # Frontend React application
+├── server/              # Express.js backend server
+├── public/              # Static assets
+└── components.json      # UI components configuration
+```
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
